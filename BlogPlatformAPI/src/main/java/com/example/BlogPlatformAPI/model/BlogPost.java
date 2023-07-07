@@ -1,6 +1,19 @@
 package com.example.BlogPlatformAPI.model;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
+import java.util.Objects;
+
+@Entity
 public class BlogPost {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
     private String title;
@@ -37,6 +50,29 @@ public class BlogPost {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "BlogPost{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BlogPost blogPost = (BlogPost) o;
+        return Objects.equals(id, blogPost.id) && Objects.equals(title, blogPost.title) && Objects.equals(content, blogPost.content) && Objects.equals(author, blogPost.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, content, author);
     }
 }
 
